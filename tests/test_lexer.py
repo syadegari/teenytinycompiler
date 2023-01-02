@@ -22,6 +22,14 @@ class TestLexer(unittest.TestCase):
         self.assertEqual(token.kind, TokenType.MINUS)
 
         token = lexer.getToken()
+        self.assertEqual(token.kind, TokenType.ASTERISK)
+
+        token = lexer.getToken()
+        self.assertEqual(token.kind, TokenType.SLASH)
+
+        token = lexer.getToken()
+        self.assertEqual(token.kind, TokenType.NEWLINE)
+
 
 if __name__ == '__main__':
     unittest.main()
