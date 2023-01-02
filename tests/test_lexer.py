@@ -12,7 +12,7 @@ class TestLexer(unittest.TestCase):
             lexer.nextChar()
 
     def test_getToken(self):
-        input = '+- */'
+        input = '+- */ >>= = !='
         lexer = Lexer(input)
 
         token = lexer.getToken()
@@ -26,6 +26,18 @@ class TestLexer(unittest.TestCase):
 
         token = lexer.getToken()
         self.assertEqual(token.kind, TokenType.SLASH)
+
+        token = lexer.getToken()
+        self.assertEqual(token.kind, TokenType.GT)
+
+        token = lexer.getToken()
+        self.assertEqual(token.kind, TokenType.GTEQ)
+
+        token = lexer.getToken()
+        self.assertEqual(token.kind, TokenType.EQ)
+
+        token = lexer.getToken()
+        self.assertEqual(token.kind, TokenType.NOTEQ)
 
         token = lexer.getToken()
         self.assertEqual(token.kind, TokenType.NEWLINE)
