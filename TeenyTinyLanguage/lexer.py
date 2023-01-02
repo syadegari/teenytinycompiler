@@ -57,4 +57,7 @@ class Lexer:
         self.nextChar()
         return token
 
+    def __repr__(self) -> str:
+        return self.curChar
+
 
