@@ -1,6 +1,9 @@
 class Lexer:
-    def __init__(self) -> None:
-        pass
+    def __init__(self, input) -> None:
+        self.source = input + '\n'
+        self.curChar = ''
+        self.curPos = -1
+        self.nextChar()
 
     # Process the next characther
     def nextChar(self):
