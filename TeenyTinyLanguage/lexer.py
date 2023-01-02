@@ -14,8 +14,12 @@ class Lexer:
             self.curChar = self.source[self.curPos]
 
     # Return the lookahead character
-    def peek(self):
-        pass
+    def peek(self) -> str:
+        peekPos = self.curPos + 1
+        if peekPos >= len(self.source):
+            return '\0'
+        else:
+            return self.source[peekPos]
 
     # For an invalid token, print an error message and quit
     def abort(self):
