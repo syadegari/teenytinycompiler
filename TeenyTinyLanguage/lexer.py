@@ -79,6 +79,14 @@ class Lexer:
                 token = Token(lastChar + self.curChar, TokenType.NOTEQ)
             else:
                 self.abort("Expected !=, got !" + self.curChar)
+        elif self.curChar == '\"':
+            self.nextChar()
+            startPos = self.curPos
+            while self.curChar != '\"':
+                if self.curChar in {'\r', '\n', '\\', '\t', '%'}:
+                    self.abort('Illegal character in string: ' + self.curChar)
+                self.nextChar()
+            token = Token(self.source[startPos : self.curPos], TokenType.STRING)
         elif self.curChar == '\0':
             token = Token(self.curChar, TokenType.EOF)
         else:
