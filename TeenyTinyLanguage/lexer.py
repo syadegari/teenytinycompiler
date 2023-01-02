@@ -87,6 +87,17 @@ class Lexer:
                     self.abort('Illegal character in string: ' + self.curChar)
                 self.nextChar()
             token = Token(self.source[startPos : self.curPos], TokenType.STRING)
+        elif self.curChar.isdigit():
+            startPos = self.curPos
+            while self.peek().isdigit():
+                self.nextChar()
+            if self.peek() == '.':
+                self.nextChar()
+                if not self.peek().isdigit():
+                    self.abort('Must follow by at least one digit after decimal point')
+                while self.peek().isdigit():
+                    self.nextChar()
+            token = Token(self.source[startPos : self.curPos + 1], TokenType.NUMBER)
         elif self.curChar == '\0':
             token = Token(self.curChar, TokenType.EOF)
         else:
