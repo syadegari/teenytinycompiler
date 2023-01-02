@@ -6,8 +6,12 @@ class Lexer:
         self.nextChar()
 
     # Process the next characther
-    def nextChar(self):
-        pass
+    def nextChar(self) -> None:
+        self.curPos += 1
+        if self.curPos >= len(self.source):
+            self.curChar = '\0'
+        else:
+            self.curChar = self.source[self.curPos]
 
     # Return the lookahead character
     def peek(self):
