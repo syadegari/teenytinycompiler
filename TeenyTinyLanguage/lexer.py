@@ -1,3 +1,5 @@
+from .lang_token import Token, TokenType
+
 class Lexer:
     def __init__(self, input) -> None:
         self.source = input + '\n'
@@ -35,22 +37,24 @@ class Lexer:
         pass
 
     # Return the next token
-    def getToken(self):
+    def getToken(self) -> Token:
         if self.curChar == '+':
-            pass
+            token = Token(self.curChar, TokenType.PLUS)
         elif self.curChar == '-':
-            pass
+            token = Token(self.curChar, TokenType.MINUS)
         elif self.curChar == '*':
-            pass
+            token = Token(self.curChar, TokenType.ASTERISK)
         elif self.curChar == '/':
-            pass
+            token = Token(self.curChar, TokenType.SLASH)
         elif self.curChar == '\n':
-            pass
+            token = Token(self.curChar, TokenType.NEWLINE)
         elif self.curChar == '\0':
-            pass
+            token = Token(self.curChar, TokenType.EOF)
         else:
+            # unknown token
             pass
 
         self.nextChar()
+        return token
 
 
