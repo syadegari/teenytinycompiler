@@ -11,6 +11,17 @@ class TestLexer(unittest.TestCase):
             self.assertEqual(lexer.curChar, input[lexer.curPos])
             lexer.nextChar()
 
+    def test_getToken(self):
+        input = '+- */'
+        lexer = Lexer(input)
+
+        token = lexer.getToken()
+        self.assertEqual(token.kind, TokenType.PLUS)
+
+        token = lexer.getToken()
+        self.assertEqual(token.kind, TokenType.MINUS)
+
+        token = lexer.getToken()
 
 if __name__ == '__main__':
     unittest.main()
