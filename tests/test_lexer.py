@@ -58,6 +58,17 @@ class TestLexer(unittest.TestCase):
         lexer = Lexer(input)
         self.assertEqual(lexer.getToken().kind, TokenType.NEWLINE)
 
+    def test_string(self):
+        input = '+- \"Hello World\" # Some comments here!\n */'
+        lexer = Lexer(input)
+        self.assertEqual(lexer.getToken().kind, TokenType.PLUS)
+        self.assertEqual(lexer.getToken().kind, TokenType.MINUS)
+        self.assertEqual(lexer.getToken().kind, TokenType.STRING)
+        self.assertEqual(lexer.getToken().kind, TokenType.NEWLINE)
+        self.assertEqual(lexer.getToken().kind, TokenType.ASTERISK)
+        self.assertEqual(lexer.getToken().kind, TokenType.SLASH)
+        self.assertEqual(lexer.getToken().kind, TokenType.NEWLINE)
+
 
 if __name__ == '__main__':
     unittest.main()
