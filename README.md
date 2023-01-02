@@ -5,3 +5,4 @@ This is an exercise to __rebuild__ a simple compiler that implement a dialect of
 - Occasional refactoring as well as python sepcific data structures when it is appropriate. 
 - Some aspects of the language might have been expanded. 
 - Structure of the code is different from the repository, since I have followed the blog posts instead of the code in the repository. 
+- Extra methods or functions that could help with debugging.
