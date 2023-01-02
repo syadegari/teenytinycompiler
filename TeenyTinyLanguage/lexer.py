@@ -29,8 +29,9 @@ class Lexer:
 
     # Skip the whitespace except newlines
     # Newlines are used to indicate the end of a statement.
-    def skipWhitespace(self):
-        pass
+    def skipWhitespace(self) -> None:
+        while self.curChar == ' ' or self.curChar == '\t' or self.curChar == '\r':
+            self.nextChar()
 
     # Skip comments
     def skipComment(self):
@@ -38,6 +39,8 @@ class Lexer:
 
     # Return the next token
     def getToken(self) -> Token:
+        self.skipWhitespace()
+
         if self.curChar == '+':
             token = Token(self.curChar, TokenType.PLUS)
         elif self.curChar == '-':
