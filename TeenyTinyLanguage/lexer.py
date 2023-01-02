@@ -44,7 +44,7 @@ class Lexer:
     def getToken(self) -> Token:
         self.skipWhitespace()
         self.skipComment()
-        token = None
+        # token = None
 
         if self.curChar == '+':
             token = Token(self.curChar, TokenType.PLUS)
