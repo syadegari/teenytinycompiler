@@ -42,6 +42,22 @@ class TestLexer(unittest.TestCase):
         token = lexer.getToken()
         self.assertEqual(token.kind, TokenType.NEWLINE)
 
+    def test_comment(self):
+        input = '>= +  # The rest is a comment'
+        lexer = Lexer(input)
+        self.assertEqual(lexer.getToken().kind, TokenType.GTEQ)
+        self.assertEqual(lexer.getToken().kind, TokenType.PLUS)
+        # comment begins here, should ignore until newline is reached
+        self.assertEqual(lexer.getToken().kind, TokenType.NEWLINE)
+
+        input ='# This line is a comment'
+        lexer = Lexer(input)
+        self.assertEqual(lexer.getToken().kind, TokenType.NEWLINE)
+
+        input = '   # whitespace before comment begins'
+        lexer = Lexer(input)
+        self.assertEqual(lexer.getToken().kind, TokenType.NEWLINE)
+
 
 if __name__ == '__main__':
     unittest.main()
