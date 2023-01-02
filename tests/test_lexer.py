@@ -69,6 +69,24 @@ class TestLexer(unittest.TestCase):
         self.assertEqual(lexer.getToken().kind, TokenType.SLASH)
         self.assertEqual(lexer.getToken().kind, TokenType.NEWLINE)
 
+    def test_number(self):
+        input = "+-123 9.8654*/"
+        lexer = Lexer(input)
+
+        self.assertEqual(lexer.getToken().kind, TokenType.PLUS)
+        self.assertEqual(lexer.getToken().kind, TokenType.MINUS)
+        #
+        token = lexer.getToken()
+        self.assertEqual(token.kind, TokenType.NUMBER)
+        self.assertEqual(token.text, '123')
+        #
+        token = lexer.getToken()
+        self.assertEqual(token.kind, TokenType.NUMBER)
+        self.assertEqual(token.text, '9.8654')
+        #
+        self.assertEqual(lexer.getToken().kind, TokenType.ASTERISK)
+        self.assertEqual(lexer.getToken().kind, TokenType.SLASH)
+        self.assertEqual(lexer.getToken().kind, TokenType.NEWLINE)
 
 if __name__ == '__main__':
     unittest.main()
