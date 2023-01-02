@@ -1,4 +1,5 @@
 import enum
+from dataclasses import dataclass
 
 class TokenType(enum.Enum):
 	EOF = -1
@@ -32,9 +33,9 @@ class TokenType(enum.Enum):
 	GTEQ = 211
 
 
+@dataclass
 class Token:
-    def __init__(self, token_text, token_kind) -> None:
-        self.text = token_text
-        self.kind = token_kind
+	text : str
+	kind : TokenType
 
 
