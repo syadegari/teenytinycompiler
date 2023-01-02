@@ -1,3 +1,4 @@
+import sys
 from .lang_token import Token, TokenType
 
 class Lexer:
@@ -24,8 +25,8 @@ class Lexer:
             return self.source[peekPos]
 
     # For an invalid token, print an error message and quit
-    def abort(self):
-        pass
+    def abort(self, message) -> None:
+        sys.exit("Lexing error. " + message)
 
     # Skip the whitespace except newlines
     # Newlines are used to indicate the end of a statement.
@@ -55,7 +56,7 @@ class Lexer:
             token = Token(self.curChar, TokenType.EOF)
         else:
             # unknown token
-            pass
+            self.abort("Unknown token: " + self.curChar)
 
         self.nextChar()
         return token
