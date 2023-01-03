@@ -88,5 +88,32 @@ class TestLexer(unittest.TestCase):
         self.assertEqual(lexer.getToken().kind, TokenType.SLASH)
         self.assertEqual(lexer.getToken().kind, TokenType.NEWLINE)
 
+    def test_keyword(self):
+        input = '-+ IF WHILE'
+        lexer = Lexer(input)
+
+        self.assertEqual(lexer.getToken().kind, TokenType.MINUS)
+        self.assertEqual(lexer.getToken().kind, TokenType.PLUS)
+
+        tok = lexer.getToken()
+        self.assertEqual(tok.kind, TokenType.IF)
+        self.assertEqual(tok.text, 'IF')
+        tok = lexer.getToken()
+        self.assertEqual(tok.kind, TokenType.WHILE)
+        self.assertEqual(tok.text, 'WHILE')
+
+        self.assertEqual(lexer.getToken().kind, TokenType.NEWLINE)
+
+    def test_identifier(self):
+        input = 'IF v == 1'
+        lexer = Lexer(input)
+
+        self.assertEqual(lexer.getToken().kind, TokenType.IF)
+        self.assertEqual(lexer.getToken().kind, TokenType.IDENT)
+        self.assertEqual(lexer.getToken().kind, TokenType.EQEQ)
+        self.assertEqual(lexer.getToken().kind, TokenType.NUMBER)
+        self.assertEqual(lexer.getToken().kind, TokenType.NEWLINE)
+
+
 if __name__ == '__main__':
     unittest.main()
