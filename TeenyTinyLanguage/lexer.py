@@ -98,6 +98,16 @@ class Lexer:
                 while self.peek().isdigit():
                     self.nextChar()
             token = Token(self.source[startPos : self.curPos + 1], TokenType.NUMBER)
+        elif self.curChar.isalpha():
+            startPos = self.curPos
+            while self.peek().isalnum():
+                self.nextChar()
+            tokText = self.source[startPos : self.curPos + 1]
+            keyword = TokenType.checkIfKeyword(tokText)
+            if keyword == None:
+                token = Token(tokText, TokenType.IDENT)
+            else:
+                token = Token(tokText, keyword)
         elif self.curChar == '\0':
             token = Token(self.curChar, TokenType.EOF)
         else:
