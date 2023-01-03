@@ -44,18 +44,22 @@ class Lexer:
     def getToken(self) -> Token:
         self.skipWhitespace()
         self.skipComment()
-        # token = None
-
+        # + PLUS
         if self.curChar == '+':
             token = Token(self.curChar, TokenType.PLUS)
+        # - MINUS
         elif self.curChar == '-':
             token = Token(self.curChar, TokenType.MINUS)
+        # * ASTERISK
         elif self.curChar == '*':
             token = Token(self.curChar, TokenType.ASTERISK)
+        # / SLASH
         elif self.curChar == '/':
             token = Token(self.curChar, TokenType.SLASH)
+        # \n NEWLINE
         elif self.curChar == '\n':
             token = Token(self.curChar, TokenType.NEWLINE)
+        # = EQ and == EQEQ
         elif self.curChar == '=':
             if self.peek() == '=':
                 lastChar = self.curChar
@@ -63,6 +67,7 @@ class Lexer:
                 token = Token(lastChar + self.curChar, TokenType.EQEQ)
             else:
                 token = Token(self.curChar, TokenType.EQ)
+        # < LT and <= LTEQ
         elif self.curChar == '<':
             if self.peek() == '=':
                 lastChar = self.curChar
@@ -70,6 +75,7 @@ class Lexer:
                 token = Token(lastChar + self.curChar, TokenType.LTEQ)
             else:
                 token = Token(self.curChar, TokenType.LT)
+        # > GT and >= GTEQ
         elif self.curChar == '>':
             if self.peek() == '=':
                 lastChar = self.curChar
@@ -77,6 +83,7 @@ class Lexer:
                 token = Token(lastChar + self.curChar, TokenType.GTEQ)
             else:
                 token = Token(self.curChar, TokenType.GT)
+        # != NOTEQ
         elif self.curChar == '!':
             if self.peek() == '=':
                 lastChar = self.curChar
@@ -84,6 +91,7 @@ class Lexer:
                 token = Token(lastChar + self.curChar, TokenType.NOTEQ)
             else:
                 self.abort("Expected !=, got !" + self.curChar)
+        # STRING
         elif self.curChar == '\"':
             self.nextChar()
             startPos = self.curPos
@@ -92,6 +100,7 @@ class Lexer:
                     self.abort('Illegal character in string: ' + self.curChar)
                 self.nextChar()
             token = Token(self.source[startPos : self.curPos], TokenType.STRING)
+        # NUMBER
         elif self.curChar.isdigit():
             startPos = self.curPos
             while self.peek().isdigit():
@@ -103,6 +112,7 @@ class Lexer:
                 while self.peek().isdigit():
                     self.nextChar()
             token = Token(self.source[startPos : self.curPos + 1], TokenType.NUMBER)
+        # IDENT and keyword
         elif self.curChar.isalpha():
             startPos = self.curPos
             while self.peek().isalnum():
@@ -113,6 +123,7 @@ class Lexer:
                 token = Token(tokText, TokenType.IDENT)
             else:
                 token = Token(tokText, keyword)
+        # \0 EOF
         elif self.curChar == '\0':
             token = Token(self.curChar, TokenType.EOF)
         else:
