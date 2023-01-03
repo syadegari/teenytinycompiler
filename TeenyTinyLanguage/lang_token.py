@@ -1,3 +1,4 @@
+from __future__ import annotations
 import enum
 from dataclasses import dataclass
 
@@ -32,6 +33,12 @@ class TokenType(enum.Enum):
 	GT = 210
 	GTEQ = 211
 
+	@staticmethod
+	def checkIfKeyword(token_text) -> None | TokenType:
+		for token in TokenType:
+			if token.name == token_text and 200 > token.value >= 100:
+				return token
+		return None
 
 @dataclass
 class Token:
