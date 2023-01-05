@@ -6,3 +6,6 @@ This is an exercise to __rebuild__ a simple compiler that implement a dialect of
 - Some aspects of the language might have been expanded. 
 - Structure of the code is different from the repository, since I have followed the blog posts instead of the code in the repository. 
 - Extra methods or functions that could help with debugging.
+
+## Ideas for extension and modifications
+Use the ideas and implementation from David Callanan to write an AST for the parser (or rewrite the parser completely based on his code). Look for additional details to [youtube](https://www.youtube.com/playlist?list=PLZQftyCk7_SdoVexSmwy_tBgs7P0b97yD) posts and accompanying [github](https://github.com/davidcallanan/py-myopl-code) source. 
